@@ -1,36 +1,29 @@
 pipeline {
     agent { docker { image 'node:lts-alpine' } }
-    try {
-        stages {
-            stage('build') {
-                steps {
-                    sh 'node --version'
-                    sh 'npm i'
-                }
+    stages {
+        stage('build') {
+            steps {
+                sh 'node --version'
+                sh 'npm i'
             }
+        }
 
-            stage('test') {
-                steps {
-                    sh 'npm run test'
-                }
-            }
-
-            stage ('alert') {
-                emailex {
-                    body: 'Passed',
-                    subject: 'Test passed',
-                    to: 'asaf.rivni@ericom.com'
-                }
+        stage('test') {
+            steps {
+                sh 'npm run test'
             }
         }
     }
-    catch (exception) {
-        stage ('alert') {
-            emailex {
-                body: 'Passed',
-                subject: 'Test passed',
-                to: 'asaf.rivni@ericom.com'
-            }
+    post {
+        success {
+            emailext body: 'Build succeeded.',
+                    subject: 'Build Successful!',
+                    to: 'asaf.rivni@ericom.com'
+        }
+        failure {
+            emailext body: 'Build failed. Please check the build logs for more information.',
+                    subject: 'Build Failed!',
+                    to: 'asaf.rivni@ericom.com'
         }
     }
 }
