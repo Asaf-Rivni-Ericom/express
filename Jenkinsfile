@@ -18,12 +18,12 @@ pipeline {
         success {
             emailext body: 'Build succeeded.',
                     subject: 'Build Successful!',
-                    to: 'asaf.rivni@ericom.com'
+                    to: 'asafrivni1@gmail.com'
         }
         failure {
             emailext body: 'Build failed. Please check the build logs for more information.',
                     subject: 'Build Failed!',
-                    to: 'asaf.rivni@ericom.com'
+                    to: 'asafrivni1@gmail.com'
         }
     }
 }
