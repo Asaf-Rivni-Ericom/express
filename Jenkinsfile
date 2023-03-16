@@ -26,10 +26,12 @@ pipeline {
         //             to: 'asafrivni1@gmail.com'
         // }
         success {
-            sendSlack(message:'build success')
+            sendSlack color:'good',
+            message:'build success'
         }
         failure {
-            sendSlack(message:'build fail')
+            sendSlack color:'bad',
+            message:'build failed'
         }
     }
 }
