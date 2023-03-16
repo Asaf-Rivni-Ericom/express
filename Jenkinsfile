@@ -15,15 +15,21 @@ pipeline {
         }
     }
     post {
+        // success {
+        //     emailext body: 'Build succeeded.',
+        //             subject: 'Build Successful!',
+        //             to: 'asafrivni1@gmail.com'
+        // }
+        // failure {
+        //     emailext body: 'Build failed. Please check the build logs for more information.',
+        //             subject: 'Build Failed!',
+        //             to: 'asafrivni1@gmail.com'
+        // }
         success {
-            emailext body: 'Build succeeded.',
-                    subject: 'Build Successful!',
-                    to: 'asafrivni1@gmail.com'
+            sendSlack(message:'build success')
         }
         failure {
-            emailext body: 'Build failed. Please check the build logs for more information.',
-                    subject: 'Build Failed!',
-                    to: 'asafrivni1@gmail.com'
+            sendSlack(message:'build fail')
         }
     }
 }
